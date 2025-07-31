@@ -9,6 +9,7 @@ import { authAPI } from '@/lib/api/client'
 import toast from 'react-hot-toast'
 import { Mail, ArrowLeft, Send } from 'lucide-react'
 import { motion } from 'framer-motion'
+import { useTranslations } from 'next-intl'
 
 interface PasswordResetModalProps {
   trigger?: React.ReactNode
@@ -19,6 +20,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
   const [email, setEmail] = useState('')
   const [loading, setLoading] = useState(false)
   const [sent, setSent] = useState(false)
+  const t = useTranslations('auth.passwordReset')
 
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault()
@@ -32,9 +34,9 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
       await new Promise(resolve => setTimeout(resolve, 1000))
       
       setSent(true)
-      toast.success('Link za resetovanje lozinke je poslat na vaš email!')
+      toast.success(t('success'))
     } catch (error: any) {
-      const message = error.response?.data?.detail || 'Greška pri slanju email-a'
+      const message = error.response?.data?.detail || t('error')
       toast.error(message)
     } finally {
       setLoading(false)
@@ -52,14 +54,14 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
       <DialogTrigger asChild>
         {trigger || (
           <Button variant="link" className="text-sm text-blue-600 hover:text-blue-800 p-0 h-auto">
-            Zaboravili ste lozinku?
+            {t('forgotPassword')}
           </Button>
         )}
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center">
-            Resetovanje lozinke
+            {t('title')}
           </DialogTitle>
         </DialogHeader>
 
@@ -77,7 +79,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
               animate={{ opacity: 1 }}
               transition={{ delay: 0.1 }}
             >
-              Unesite vašu email adresu i poslaćemo vam link za resetovanje lozinke.
+              {t('description')}
             </motion.p>
 
             <motion.div 
@@ -86,7 +88,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.2 }}
             >
-              <Label htmlFor="reset-email">Email adresa</Label>
+              <Label htmlFor="reset-email">{t('email')}</Label>
               <div className="relative">
                 <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                 <Input
@@ -114,7 +116,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
                 className="flex-1"
               >
                 <ArrowLeft className="mr-2 h-4 w-4" />
-                Nazad
+                {t('back')}
               </Button>
               <Button
                 type="submit"
@@ -122,11 +124,11 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
                 disabled={loading}
               >
                 {loading ? (
-                  'Slanje...'
+                  t('loading')
                 ) : (
                   <>
                     <Send className="mr-2 h-4 w-4" />
-                    Pošalji
+                    {t('send')}
                   </>
                 )}
               </Button>
@@ -154,7 +156,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.3 }}
             >
-              Email poslat!
+              {t('emailSent')}
             </motion.h3>
             
             <motion.p 
@@ -163,7 +165,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
               animate={{ opacity: 1, y: 0 }}
               transition={{ delay: 0.4 }}
             >
-              Proverite vašu email adresu i pratite instrukcije za resetovanje lozinke.
+              {t('checkEmail')}
             </motion.p>
             
             <motion.div
@@ -172,7 +174,7 @@ export default function PasswordResetModal({ trigger }: PasswordResetModalProps)
               transition={{ delay: 0.5 }}
             >
               <Button onClick={handleClose} className="w-full">
-                Zatvori
+                {t('close')}
               </Button>
             </motion.div>
           </motion.div>

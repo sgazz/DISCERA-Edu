@@ -14,6 +14,7 @@ import { Eye, EyeOff, Mail, Lock, User, UserPlus, LogIn } from 'lucide-react'
 import { motion, AnimatePresence } from 'framer-motion'
 import PasswordResetModal from './PasswordResetModal'
 import SocialLogin from './SocialLogin'
+import { useTranslations } from 'next-intl'
 
 export default function AuthModal() {
   const [isOpen, setIsOpen] = useState(false)
@@ -25,6 +26,7 @@ export default function AuthModal() {
   const [showSocialLogin, setShowSocialLogin] = useState(true)
   
   const { login, register } = useAuth()
+  const t = useTranslations('auth')
 
   const [loginData, setLoginData] = useState<LoginForm>({
     email: '',
@@ -56,11 +58,11 @@ export default function AuthModal() {
         localStorage.removeItem('discera_remember_email')
       }
       
-      toast.success('Uspešno ste se prijavili!')
+      toast.success(t('login.success'))
       setIsOpen(false)
       setLoginData({ email: '', password: '' })
     } catch (error: any) {
-      const message = error.response?.data?.detail || 'Greška pri prijavi'
+      const message = error.response?.data?.detail || t('login.error')
       toast.error(message)
     } finally {
       setLoading(false)
@@ -71,12 +73,12 @@ export default function AuthModal() {
     e.preventDefault()
     
     if (registerData.password !== registerData.confirmPassword) {
-      toast.error('Lozinke se ne poklapaju')
+      toast.error(t('register.passwordMismatch'))
       return
     }
 
     if (registerData.password.length < 6) {
-      toast.error('Lozinka mora imati najmanje 6 karaktera')
+      toast.error(t('register.passwordTooShort'))
       return
     }
 
@@ -85,7 +87,7 @@ export default function AuthModal() {
     try {
       const { confirmPassword, ...registerPayload } = registerData
       await register(registerPayload)
-      toast.success('Uspešno ste se registrovali!')
+      toast.success(t('register.success'))
       setIsOpen(false)
       setRegisterData({
         email: '',
@@ -96,7 +98,7 @@ export default function AuthModal() {
         role: 'student',
       })
     } catch (error: any) {
-      const message = error.response?.data?.detail || 'Greška pri registraciji'
+      const message = error.response?.data?.detail || t('register.error')
       toast.error(message)
     } finally {
       setLoading(false)
@@ -139,7 +141,7 @@ export default function AuthModal() {
   }
 
   const handleSocialLogin = (provider: string) => {
-    toast(`${provider} login će biti implementiran uskoro!`, {
+    toast(t('social.comingSoon', { provider }), {
       icon: '🔧',
       style: {
         borderRadius: '10px',
@@ -162,14 +164,14 @@ export default function AuthModal() {
         >
           <Button variant="outline" className="flex items-center gap-2">
             <LogIn className="h-4 w-4" />
-            Login
+            {t('tabs.login')}
           </Button>
         </motion.div>
       </DialogTrigger>
       <DialogContent className="sm:max-w-md">
         <DialogHeader>
           <DialogTitle className="text-center">
-            {activeTab === 'login' ? 'Prijavite se' : 'Registrujte se'}
+            {activeTab === 'login' ? t('login.title') : t('register.title')}
           </DialogTitle>
         </DialogHeader>
 
@@ -190,7 +192,7 @@ export default function AuthModal() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Prijava
+            {t('tabs.login')}
           </motion.button>
           <motion.button
             onClick={() => setActiveTab('register')}
@@ -202,7 +204,7 @@ export default function AuthModal() {
             whileHover={{ scale: 1.02 }}
             whileTap={{ scale: 0.98 }}
           >
-            Registracija
+            {t('tabs.register')}
           </motion.button>
         </motion.div>
 
@@ -242,7 +244,7 @@ export default function AuthModal() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.1 }}
                   >
-                    <Label htmlFor="login-email">Email adresa</Label>
+                    <Label htmlFor="login-email">{t('login.email')}</Label>
                     <div className="relative">
                       <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
@@ -264,14 +266,14 @@ export default function AuthModal() {
                     animate={{ opacity: 1, y: 0 }}
                     transition={{ delay: 0.2 }}
                   >
-                    <Label htmlFor="login-password">Lozinka</Label>
+                    <Label htmlFor="login-password">{t('login.password')}</Label>
                     <div className="relative">
                       <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                       <Input
                         id="login-password"
                         name="password"
                         type={showPassword ? 'text' : 'password'}
-                        placeholder="Unesite lozinku"
+                        placeholder={t('login.passwordPlaceholder')}
                         value={loginData.password}
                         onChange={handleLoginChange}
                         className="pl-10 pr-10"
@@ -305,7 +307,7 @@ export default function AuthModal() {
                         htmlFor="remember-me"
                         className="text-sm font-normal cursor-pointer"
                       >
-                        Zapamti me
+                        {t('login.rememberMe')}
                       </Label>
                     </div>
                     
@@ -331,7 +333,7 @@ export default function AuthModal() {
                       className="flex-1"
                       disabled={loading}
                     >
-                      {loading ? 'Prijavljivanje...' : 'Prijavite se'}
+                      {loading ? t('login.loading') : t('login.submit')}
                     </Button>
                   </motion.div>
                 </motion.form>
@@ -355,7 +357,7 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.1 }}
               >
-                <Label htmlFor="register-email">Email adresa</Label>
+                <Label htmlFor="register-email">{t('register.email')}</Label>
                 <div className="relative">
                   <Mail className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
@@ -377,14 +379,14 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.2 }}
               >
-                <Label htmlFor="register-username">Korisničko ime</Label>
+                <Label htmlFor="register-username">{t('register.username')}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="register-username"
                     name="username"
                     type="text"
-                    placeholder="korisnicko_ime"
+                    placeholder={t('register.usernamePlaceholder')}
                     value={registerData.username}
                     onChange={handleRegisterChange}
                     className="pl-10"
@@ -399,14 +401,14 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.3 }}
               >
-                <Label htmlFor="register-full-name">Puno ime</Label>
+                <Label htmlFor="register-full-name">{t('register.fullName')}</Label>
                 <div className="relative">
                   <User className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="register-full-name"
                     name="full_name"
                     type="text"
-                    placeholder="Ime i prezime"
+                    placeholder={t('register.fullNamePlaceholder')}
                     value={registerData.full_name}
                     onChange={handleRegisterChange}
                     className="pl-10"
@@ -421,15 +423,15 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.4 }}
               >
-                <Label htmlFor="register-role">Uloga</Label>
+                <Label htmlFor="register-role">{t('register.role')}</Label>
                 <Select value={registerData.role} onValueChange={handleRoleChange}>
                   <SelectTrigger>
-                    <SelectValue placeholder="Izaberite ulogu" />
+                    <SelectValue placeholder={t('register.rolePlaceholder')} />
                   </SelectTrigger>
                   <SelectContent>
-                    <SelectItem value="student">Student</SelectItem>
-                    <SelectItem value="teacher">Nastavnik</SelectItem>
-                    <SelectItem value="admin">Administrator</SelectItem>
+                    <SelectItem value="student">{t('register.student')}</SelectItem>
+                    <SelectItem value="teacher">{t('register.teacher')}</SelectItem>
+                    <SelectItem value="admin">{t('register.admin')}</SelectItem>
                   </SelectContent>
                 </Select>
               </motion.div>
@@ -440,14 +442,14 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.5 }}
               >
-                <Label htmlFor="register-password">Lozinka</Label>
+                <Label htmlFor="register-password">{t('register.password')}</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="register-password"
                     name="password"
                     type={showPassword ? 'text' : 'password'}
-                    placeholder="Najmanje 6 karaktera"
+                    placeholder={t('register.passwordPlaceholder')}
                     value={registerData.password}
                     onChange={handleRegisterChange}
                     className="pl-10 pr-10"
@@ -471,14 +473,14 @@ export default function AuthModal() {
                 animate={{ opacity: 1, y: 0 }}
                 transition={{ delay: 0.6 }}
               >
-                <Label htmlFor="register-confirm-password">Potvrdite lozinku</Label>
+                <Label htmlFor="register-confirm-password">{t('register.confirmPassword')}</Label>
                 <div className="relative">
                   <Lock className="absolute left-3 top-3 h-4 w-4 text-gray-400" />
                   <Input
                     id="register-confirm-password"
                     name="confirmPassword"
                     type={showConfirmPassword ? 'text' : 'password'}
-                    placeholder="Ponovite lozinku"
+                    placeholder={t('register.confirmPasswordPlaceholder')}
                     value={registerData.confirmPassword}
                     onChange={handleRegisterChange}
                     className="pl-10 pr-10"
@@ -506,7 +508,7 @@ export default function AuthModal() {
                   className="w-full"
                   disabled={loading}
                 >
-                  {loading ? 'Registracija...' : 'Registrujte se'}
+                  {loading ? t('register.loading') : t('register.submit')}
                 </Button>
               </motion.div>
             </motion.form>

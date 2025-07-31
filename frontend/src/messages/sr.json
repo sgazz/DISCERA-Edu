@@ -1,0 +1,146 @@
+{
+  "app": {
+    "name": "DISCERA",
+    "description": "Digital Intelligent System for Comprehensive Exam Review & Assessment",
+    "tagline": "Napredni digitalni sistem za inteligentnu analizu dokumenata, generisanje testova i AI-asistirano učenje."
+  },
+  "navigation": {
+    "features": "Funkcije",
+    "about": "O nama",
+    "login": "Prijava",
+    "getStarted": "Započni"
+  },
+  "hero": {
+    "title": "DISCERA",
+    "subtitle": "Digital Intelligent System for Comprehensive Exam Review & Assessment",
+    "description": "Napredni digitalni sistem za inteligentnu analizu dokumenata, generisanje testova i AI-asistirano učenje.",
+    "uploadDocuments": "Otpremi Dokumente",
+    "startChat": "Započni Chat"
+  },
+  "features": {
+    "title": "Moćne Funkcije",
+    "subtitle": "Sve što vam treba za inteligentno obrazovanje",
+    "documentManagement": {
+      "title": "Upravljanje Dokumentima",
+      "description": "Otpremite i obradite PDF, DOCX i TXT fajlove sa inteligentnim izvlačenjem teksta i semantičkim chunking-om."
+    },
+    "ragSystem": {
+      "title": "RAG Sistem",
+      "description": "Napredni Retrieval Augmented Generation sa ChromaDB vektorskim skladištem i semantičkom pretragom."
+    },
+    "aiChat": {
+      "title": "AI Chat",
+      "description": "Kontekstno svesni AI razgovori pokretani OpenAI GPT-4 sa razumevanjem dokumenata."
+    },
+    "testGeneration": {
+      "title": "Generisanje Testova",
+      "description": "AI-pokretano automatsko kreiranje testova sa više tipova pitanja i nivoa težine."
+    },
+    "analytics": {
+      "title": "Analitika",
+      "description": "Sveobuhvatno praćenje napretka i uvid u učenje sa detaljnim metrikama performansi."
+    },
+    "security": {
+      "title": "Sigurnost",
+      "description": "JWT autentifikacija sa role-based access control i sigurnim rukovanjem dokumentima."
+    }
+  },
+  "trySection": {
+    "title": "Probaj DISCERA",
+    "subtitle": "Doživi moć AI-asistiranog učenja",
+    "aiChat": "AI Chat",
+    "upload": "Otpremi",
+    "login": "Prijava",
+    "aiAssistant": "AI Asistent",
+    "askQuestions": "Postavite pitanja o vašim dokumentima",
+    "askPlaceholder": "Postavite pitanje...",
+    "send": "Pošalji",
+    "chatComingSoon": "Chat interfejs uskoro...",
+    "documentUpload": "Otpremanje Dokumenata",
+    "uploadDescription": "Otpremite vaše dokumente za analizu",
+    "dragDropText": "Prevucite vaše fajlove ovde ili kliknite za pregled",
+    "authentication": "Autentifikacija",
+    "authDescription": "Prijavite se ili napravite nalog"
+  },
+  "stats": {
+    "backendCoverage": "Backend Test Pokrivenost",
+    "apiEndpoints": "API Endpoint-ovi",
+    "fileFormats": "Podržani Formati Fajlova"
+  },
+  "footer": {
+    "description": "Omogućavamo obrazovanje kroz inteligentnu analizu dokumenata i AI-asistirano učenje.",
+    "features": "Funkcije",
+    "technology": "Tehnologija",
+    "support": "Podrška",
+    "documentation": "Dokumentacija",
+    "github": "GitHub",
+    "issues": "Problemi",
+    "contact": "Kontakt",
+    "copyright": "© 2025 DISCERA. Sva prava zadržana."
+  },
+  "auth": {
+    "login": {
+      "title": "Prijavite se",
+      "email": "Email adresa",
+      "password": "Lozinka",
+      "passwordPlaceholder": "Unesite lozinku",
+      "rememberMe": "Zapamti me",
+      "forgotPassword": "Zaboravili ste lozinku?",
+      "submit": "Prijavite se",
+      "loading": "Prijavljivanje...",
+      "success": "Uspešno ste se prijavili!",
+      "error": "Greška pri prijavi"
+    },
+    "register": {
+      "title": "Registrujte se",
+      "email": "Email adresa",
+      "username": "Korisničko ime",
+      "usernamePlaceholder": "korisnicko_ime",
+      "fullName": "Puno ime",
+      "fullNamePlaceholder": "Ime i prezime",
+      "role": "Uloga",
+      "rolePlaceholder": "Izaberite ulogu",
+      "student": "Student",
+      "teacher": "Nastavnik",
+      "admin": "Administrator",
+      "password": "Lozinka",
+      "passwordPlaceholder": "Najmanje 6 karaktera",
+      "confirmPassword": "Potvrdite lozinku",
+      "confirmPasswordPlaceholder": "Ponovite lozinku",
+      "submit": "Registrujte se",
+      "loading": "Registracija...",
+      "success": "Uspešno ste se registrovali!",
+      "error": "Greška pri registraciji",
+      "passwordMismatch": "Lozinke se ne poklapaju",
+      "passwordTooShort": "Lozinka mora imati najmanje 6 karaktera"
+    },
+    "passwordReset": {
+      "title": "Resetovanje lozinke",
+      "description": "Unesite vašu email adresu i poslaćemo vam link za resetovanje lozinke.",
+      "email": "Email adresa",
+      "back": "Nazad",
+      "send": "Pošalji",
+      "loading": "Slanje...",
+      "success": "Link za resetovanje lozinke je poslat na vaš email!",
+      "error": "Greška pri slanju email-a",
+      "emailSent": "Email poslat!",
+      "checkEmail": "Proverite vašu email adresu i pratite instrukcije za resetovanje lozinke.",
+      "close": "Zatvori"
+    },
+    "social": {
+      "orSignInWith": "Ili se prijavite sa",
+      "google": "Google",
+      "github": "GitHub",
+      "email": "Email",
+      "comingSoon": "{provider} login će biti implementiran uskoro!"
+    },
+    "tabs": {
+      "login": "Prijava",
+      "register": "Registracija"
+    }
+  },
+  "toast": {
+    "uploadComingSoon": "Funkcija otpremanja uskoro!",
+    "chatComingSoon": "AI Chat funkcija uskoro!"
+  }
+} 

@@ -3,6 +3,7 @@
 import { Button } from '@/components/ui/button'
 import { motion } from 'framer-motion'
 import { Chrome, Github, Mail } from 'lucide-react'
+import { useTranslations } from 'next-intl'
 
 interface SocialLoginProps {
   onGoogleLogin?: () => void
@@ -15,6 +16,8 @@ export default function SocialLogin({
   onGithubLogin, 
   onEmailLogin 
 }: SocialLoginProps) {
+  const t = useTranslations('auth.social')
+
   const handleGoogleLogin = () => {
     // TODO: Implement Google OAuth
     console.log('Google login clicked')
@@ -39,7 +42,7 @@ export default function SocialLogin({
         </div>
         <div className="relative flex justify-center text-xs uppercase">
           <span className="bg-background px-2 text-muted-foreground">
-            Ili se prijavite sa
+            {t('orSignInWith')}
           </span>
         </div>
       </div>
@@ -55,7 +58,7 @@ export default function SocialLogin({
             className="w-full"
           >
             <Chrome className="mr-2 h-4 w-4" />
-            Google
+            {t('google')}
           </Button>
         </motion.div>
 
@@ -69,7 +72,7 @@ export default function SocialLogin({
             className="w-full"
           >
             <Github className="mr-2 h-4 w-4" />
-            GitHub
+            {t('github')}
           </Button>
         </motion.div>
 
@@ -83,7 +86,7 @@ export default function SocialLogin({
             className="w-full"
           >
             <Mail className="mr-2 h-4 w-4" />
-            Email
+            {t('email')}
           </Button>
         </motion.div>
       </div>

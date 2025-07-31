@@ -7,7 +7,7 @@ import { Label } from '@/components/ui/label'
 import { Dialog, DialogContent, DialogHeader, DialogTitle, DialogTrigger } from '@/components/ui/modal'
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select'
 import { useAuth } from '@/hooks/useAuth'
-import type { LoginFormType, RegisterFormType } from '@/types'
+import type { LoginForm, RegisterForm } from '@/types'
 import toast from 'react-hot-toast'
 import { Eye, EyeOff, Mail, Lock, User, UserPlus, LogIn } from 'lucide-react'
 
@@ -20,12 +20,12 @@ export default function AuthModal() {
   
   const { login, register } = useAuth()
 
-  const [loginData, setLoginData] = useState<LoginFormType>({
+  const [loginData, setLoginData] = useState<LoginForm>({
     email: '',
     password: '',
   })
 
-  const [registerData, setRegisterData] = useState<RegisterFormType>({
+  const [registerData, setRegisterData] = useState<RegisterForm>({
     email: '',
     username: '',
     full_name: '',

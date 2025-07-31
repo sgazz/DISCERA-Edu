@@ -2,7 +2,7 @@ import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
-import { AuthProvider } from '@/hooks/useAuth'
+import ClientAuthProvider from '@/components/providers/ClientAuthProvider'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -26,7 +26,7 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.className} h-full antialiased`}>
-        <AuthProvider>
+        <ClientAuthProvider>
           {children}
           <Toaster 
             position="top-right"
@@ -39,7 +39,7 @@ export default function RootLayout({
               },
             }}
           />
-        </AuthProvider>
+        </ClientAuthProvider>
       </body>
     </html>
   )

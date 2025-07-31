@@ -57,11 +57,25 @@ export default function HomePage() {
   ]
 
   const handleUploadClick = () => {
-    toast.info('Upload functionality coming soon!')
+    toast('Upload functionality coming soon!', {
+      icon: '📁',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
   }
 
   const handleChatClick = () => {
-    toast.info('AI Chat functionality coming soon!')
+    toast('AI Chat functionality coming soon!', {
+      icon: '🤖',
+      style: {
+        borderRadius: '10px',
+        background: '#333',
+        color: '#fff',
+      },
+    })
   }
 
   return (

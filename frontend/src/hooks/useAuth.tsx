@@ -40,11 +40,13 @@ export const AuthProvider = ({ children }: { children: React.ReactNode }) => {
 
   const register = async (userData: any) => {
     try {
+      console.log('useAuth register called with:', userData)
       const response = await authAPI.register(userData)
+      console.log('useAuth register response:', response)
       // After registration, automatically log in
       await login(userData.email, userData.password)
     } catch (error) {
-      console.error('Register error:', error)
+      console.error('useAuth register error:', error)
       throw error
     }
   }

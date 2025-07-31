@@ -6,12 +6,13 @@ import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/com
 import { Input } from '@/components/ui/input'
 import { Label } from '@/components/ui/label'
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs'
-import { 
-  BookOpen, 
-  MessageSquare, 
-  Upload, 
-  Brain, 
-  FileText, 
+import AuthModal from '@/components/auth/AuthModal'
+import {
+  BookOpen,
+  MessageSquare,
+  Upload,
+  Brain,
+  FileText,
   Users,
   Zap,
   Shield,
@@ -55,15 +56,12 @@ export default function HomePage() {
     }
   ]
 
-  const handleLogin = async (e: React.FormEvent) => {
-    e.preventDefault()
-    setIsLoading(true)
-    
-    // Simulate login
-    setTimeout(() => {
-      setIsLoading(false)
-      toast.success('Login successful!')
-    }, 1000)
+  const handleUploadClick = () => {
+    toast.info('Upload functionality coming soon!')
+  }
+
+  const handleChatClick = () => {
+    toast.info('AI Chat functionality coming soon!')
   }
 
   return (
@@ -81,7 +79,7 @@ export default function HomePage() {
             <nav className="hidden md:flex items-center space-x-6">
               <a href="#features" className="text-gray-600 hover:text-gray-900 transition-colors">Features</a>
               <a href="#about" className="text-gray-600 hover:text-gray-900 transition-colors">About</a>
-              <Button variant="outline">Login</Button>
+              <AuthModal />
               <Button>Get Started</Button>
             </nav>
           </div>
@@ -101,11 +99,18 @@ export default function HomePage() {
             Advanced digital system for intelligent document analysis, test generation, and AI-assisted learning.
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
-            <Button size="lg" className="text-lg px-8 py-4">
+            <Button 
+              onClick={handleUploadClick}
+              className="h-11 rounded-md text-lg px-8 py-4"
+            >
               <Upload className="mr-2 h-5 w-5" />
               Upload Documents
             </Button>
-            <Button size="lg" variant="outline" className="text-lg px-8 py-4">
+            <Button 
+              onClick={handleChatClick}
+              variant="outline" 
+              className="h-11 rounded-md text-lg px-8 py-4"
+            >
               <MessageSquare className="mr-2 h-5 w-5" />
               Start Chat
             </Button>
@@ -126,29 +131,29 @@ export default function HomePage() {
                 <div className="h-12 w-12 bg-gradient-to-r from-blue-600 to-purple-600 rounded-lg flex items-center justify-center mb-4">
                   {feature.icon}
                 </div>
-                <CardTitle>{feature.title}</CardTitle>
-                <CardDescription>{feature.description}</CardDescription>
+                <CardTitle className="text-2xl">{feature.title}</CardTitle>
+                <CardDescription className="text-sm">
+                  {feature.description}
+                </CardDescription>
               </CardHeader>
             </Card>
           ))}
         </div>
       </section>
 
-      {/* Demo Section */}
+      {/* Try DISCERA Section */}
       <section className="container mx-auto px-4 py-20">
         <div className="max-w-4xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-4xl font-bold mb-4">Try DISCERA</h2>
             <p className="text-xl text-gray-600">Experience the power of AI-assisted learning</p>
           </div>
-          
           <Tabs defaultValue="chat" className="w-full">
             <TabsList className="grid w-full grid-cols-3">
               <TabsTrigger value="chat">AI Chat</TabsTrigger>
               <TabsTrigger value="upload">Upload</TabsTrigger>
               <TabsTrigger value="login">Login</TabsTrigger>
             </TabsList>
-            
             <TabsContent value="chat" className="mt-6">
               <Card>
                 <CardHeader>
@@ -166,43 +171,28 @@ export default function HomePage() {
                 </CardContent>
               </Card>
             </TabsContent>
-            
             <TabsContent value="upload" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Upload Documents</CardTitle>
-                  <CardDescription>Upload your learning materials</CardDescription>
+                  <CardTitle>Document Upload</CardTitle>
+                  <CardDescription>Upload your documents for analysis</CardDescription>
                 </CardHeader>
                 <CardContent>
                   <div className="border-2 border-dashed border-gray-300 rounded-lg p-8 text-center">
-                    <Upload className="h-12 w-12 text-gray-400 mx-auto mb-4" />
-                    <p className="text-gray-500">Drag and drop files here or click to browse</p>
-                    <Button className="mt-4">Choose Files</Button>
+                    <Upload className="mx-auto h-12 w-12 text-gray-400 mb-4" />
+                    <p className="text-gray-500">Drag and drop your files here or click to browse</p>
                   </div>
                 </CardContent>
               </Card>
             </TabsContent>
-            
             <TabsContent value="login" className="mt-6">
               <Card>
                 <CardHeader>
-                  <CardTitle>Login</CardTitle>
-                  <CardDescription>Access your account</CardDescription>
+                  <CardTitle>Authentication</CardTitle>
+                  <CardDescription>Login or create your account</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <form onSubmit={handleLogin} className="space-y-4">
-                    <div className="space-y-2">
-                      <Label htmlFor="email">Email</Label>
-                      <Input id="email" type="email" placeholder="Enter your email" />
-                    </div>
-                    <div className="space-y-2">
-                      <Label htmlFor="password">Password</Label>
-                      <Input id="password" type="password" placeholder="Enter your password" />
-                    </div>
-                    <Button type="submit" className="w-full" disabled={isLoading}>
-                      {isLoading ? 'Logging in...' : 'Login'}
-                    </Button>
-                  </form>
+                <CardContent className="text-center">
+                  <AuthModal />
                 </CardContent>
               </Card>
             </TabsContent>
@@ -236,9 +226,7 @@ export default function HomePage() {
           <div className="grid grid-cols-1 md:grid-cols-4 gap-8">
             <div>
               <h3 className="text-xl font-bold mb-4">DISCERA</h3>
-              <p className="text-gray-400">
-                Empowering education through intelligent document analysis and AI-assisted learning.
-              </p>
+              <p className="text-gray-400">Empowering education through intelligent document analysis and AI-assisted learning.</p>
             </div>
             <div>
               <h4 className="font-semibold mb-4">Features</h4>
@@ -269,7 +257,7 @@ export default function HomePage() {
             </div>
           </div>
           <div className="border-t border-gray-800 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 DISCERA. All rights reserved.</p>
+            <p>© 2025 DISCERA. All rights reserved.</p>
           </div>
         </div>
       </footer>

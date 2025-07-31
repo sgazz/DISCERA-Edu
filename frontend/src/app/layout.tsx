@@ -1,7 +1,8 @@
-import type { Metadata } from 'next'
+import type { Metadata, Viewport } from 'next'
 import { Inter } from 'next/font/google'
 import './globals.css'
 import { Toaster } from 'react-hot-toast'
+import { AuthProvider } from '@/hooks/useAuth'
 
 const inter = Inter({ subsets: ['latin'] })
 
@@ -10,7 +11,11 @@ export const metadata: Metadata = {
   description: 'Advanced digital system for intelligent document analysis, test generation, and AI-assisted learning.',
   keywords: ['education', 'AI', 'RAG', 'test generation', 'document analysis', 'learning'],
   authors: [{ name: 'DISCERA Team' }],
-  viewport: 'width=device-width, initial-scale=1',
+}
+
+export const viewport: Viewport = {
+  width: 'device-width',
+  initialScale: 1,
 }
 
 export default function RootLayout({
@@ -21,18 +26,20 @@ export default function RootLayout({
   return (
     <html lang="en" className="h-full">
       <body className={`${inter.className} h-full antialiased`}>
-        {children}
-        <Toaster 
-          position="top-right"
-          toastOptions={{
-            duration: 4000,
-            style: {
-              background: 'hsl(var(--background))',
-              color: 'hsl(var(--foreground))',
-              border: '1px solid hsl(var(--border))',
-            },
-          }}
-        />
+        <AuthProvider>
+          {children}
+          <Toaster 
+            position="top-right"
+            toastOptions={{
+              duration: 4000,
+              style: {
+                background: 'hsl(var(--background))',
+                color: 'hsl(var(--foreground))',
+                border: '1px solid hsl(var(--border))',
+              },
+            }}
+          />
+        </AuthProvider>
       </body>
     </html>
   )
